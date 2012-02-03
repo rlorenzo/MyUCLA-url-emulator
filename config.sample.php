@@ -10,12 +10,12 @@ define('STATUS_ACCESS_DENIED', 'Status:  Unauthorized Access!');
 define('STATUS_UPDATE_FAILED', 'Status:  Status:  Update Unsuccessful. SQL Update Failed.');
 define('STATUS_INVALID_COURSE', 'Status:  Update Unsuccessful. Invalid Course.');
 
-define('MYSQL_URL_VIEW', 1);
-define('MYSQL_URL_EDIT', 2);
+define('MYUCLA_URL_VIEW', 1);
+define('MYUCLA_URL_EDIT', 2);
 
 $dsn = array(
     'phptype'  => 'mysqli',
-    'username' => '',   // user account that can read/edit mysql_updater
+    'username' => '',   // user account that can read/edit myucla_updater
     'password' => '',
     'hostspec' => 'localhost',
     'database' => 'myucla_updater',

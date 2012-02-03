@@ -40,7 +40,7 @@ $mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
 if (!empty($_GET[])) {
     $params = setup_script();   // dies on error
     
-    if (MYSQL_URL_VIEW == $params['mode']) {
+    if (MYUCLA_URL_VIEW == $params['mode']) {
         // query and return url for given term/srs
         $sql = 'SELECT  url
                 FROM    iei_urls
@@ -55,7 +55,7 @@ if (!empty($_GET[])) {
         
         echo $result->fetchRow();   // output URL
         
-    } elseif (MYSQL_URL_EDIT == $params['mode']) {
+    } elseif (MYUCLA_URL_EDIT == $params['mode']) {
         $sql = 'INSERT  iei_urls
                 SET     term=:term,
                         srs=:srs,
@@ -93,7 +93,7 @@ function print_status($status_message)
  * indicates what the user is trying to do. 
  * 
  * @return array    Returns an array with the following keys: term, srs, name,
- *                  email, url (decoded), mode (MYSQL_URL_VIEW, MYSQL_URL_EDIT)
+ *                  email, url (decoded), mode (MYUCLA_URL_VIEW, MYUCLA_URL_EDIT)
  */
 function setup_script() 
 {
@@ -118,10 +118,10 @@ function setup_script()
         $params['email'] = trim($_GET['email']);        
         
         // set correct mode
-        $params['mode'] = MYSQL_URL_EDIT;
+        $params['mode'] = MYUCLA_URL_EDIT;
     } else {
         // user wants to view url for a given term/srs
-        $params['mode'] = MYSQL_URL_VIEW;        
+        $params['mode'] = MYUCLA_URL_VIEW;        
     }
 }
 
