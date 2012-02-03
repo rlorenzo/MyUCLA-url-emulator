@@ -35,7 +35,7 @@ if (!empty($_GET)) {
     $params = setup_script();   // dies on error
  
     // connect to database
-    $mdb2 =& MDB2::connect($dsn);
+    $mdb2 = MDB2::connect($dsn);
     if (PEAR::isError($mdb2)) {
         print_status(STATUS_CONNECT_ERROR);
     }
