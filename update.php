@@ -28,17 +28,18 @@
  */
 
 require_once(dirname(__FILE__) . '/config.php');
-
-// connect to database
-$mdb2 =& MDB2::connect($dsn);
-if (PEAR::isError($mdb2)) {
-    print_status(STATUS_CONNECT_ERROR);
-}
-$mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
+require_once 'MDB2.php';
 
 // only respond if there is a GET parameter
 if (!empty($_GET)) {
     $params = setup_script();   // dies on error
+ 
+    // connect to database
+    $mdb2 =& MDB2::connect($dsn);
+    if (PEAR::isError($mdb2)) {
+        print_status(STATUS_CONNECT_ERROR);
+    }
+    $mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);    
     
     if (MYUCLA_URL_VIEW == $params['mode']) {
         // query and return url for given term/srs
