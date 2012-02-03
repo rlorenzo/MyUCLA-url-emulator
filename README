@@ -1,0 +1,62 @@
+INTRO
+
+This script emulates the My.UCLA IEI url updater service. This is used to test
+features that update the IEI urls, but don't want to actually call the real
+service.
+
+INSTALLATION
+
+1. Make sure you have the PEAR:MDB2 package installed
+   http://pear.php.net/package/MDB2
+
+   ex. pear install MDB2 
+       pear install MDB2#mysqli
+
+2. Please create the database and table specified in install.sql
+
+3. Create a MySQL user account that can access and update the given table.
+
+4. Copy the config.sample.php into config.php and fill in the values for the 
+   MySQL user account.
+
+5. Done. You might want to create an .htaccess file to ip-restrict access to
+   the script: http://www.udel.edu/topics/internet/WWW/restricting.html
+
+6. If you want to test the script, please install PHPunit and run the test suite
+   http://www.phpunit.de/manual/3.7/en/installation.html
+
+USAGE
+
+When someone is making an update the script expects the following GET parameters:
+
+name - name of person making update
+email - email of person making update
+term - course term
+srs - course srs
+url - course url, expects no http:// or https://
+
+Returns an html document with one of the following messages:
+
+Status:  Update Successful.
+Status:  Unable to Connect to SQL Servers!
+Status:  Unauthorized Access!
+Status:  Update Unsuccessful. SQL Update Failed. 
+Status:  Update Unsuccessful. Invalid Course.
+
+When someone wants to find the url for a given course the script expects the 
+following GET parameters:
+
+term - course term
+srs - course srs
+
+Returns url back (will not have http:// or https://)
+
+TESTING
+
+There is a test_script.php provided that will attempt to try to do several 
+operations. To run the script, please execute it via the web browser. But be
+sure to turn on the debugging variable in the test script.
+
+CAVEATS
+
+The SQL install file has only been tested to work for MySQL databases.
