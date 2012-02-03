@@ -43,7 +43,7 @@ if (!empty($_GET[])) {
     if (MYSQL_URL_VIEW == $params['mode']) {
         // query and return url for given term/srs
         $sql = 'SELECT  url
-                FROM    myucla_updater
+                FROM    iei_urls
                 WHERE   term=:term AND 
                         srs=:srs';
         $statement = $mdb2->prepare($sql);
@@ -56,7 +56,7 @@ if (!empty($_GET[])) {
         echo $result->fetchRow();   // output URL
         
     } elseif (MYSQL_URL_EDIT == $params['mode']) {
-        $sql = 'INSERT  myucla_updater
+        $sql = 'INSERT  iei_urls
                 SET     term=:term,
                         srs=:srs,
                         url=:url,

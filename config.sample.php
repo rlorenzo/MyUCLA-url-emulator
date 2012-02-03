@@ -18,7 +18,7 @@ $dsn = array(
     'username' => '',   // user account that can read/edit mysql_updater
     'password' => '',
     'hostspec' => 'localhost',
-    'database' => 'mysql_updater',
+    'database' => 'myucla_updater',
 );
 
 $test_server_url = '';  // must be set if you wish to run the PHPunit test suite
