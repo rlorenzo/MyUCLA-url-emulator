@@ -37,7 +37,7 @@ if (PEAR::isError($mdb2)) {
 $mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
 // only respond if there is a GET parameter
-if (!empty($_GET[])) {
+if (!empty($_GET)) {
     $params = setup_script();   // dies on error
     
     if (MYUCLA_URL_VIEW == $params['mode']) {
