@@ -1,8 +1,8 @@
 --
 -- Database: `myucla_updater`
 --
-CREATE DATABASE `myucla_updater` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `mysql_updater`;
+CREATE DATABASE IF NOT EXISTS `myucla_updater` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `myucla_updater`;
 
 -- --------------------------------------------------------
 
