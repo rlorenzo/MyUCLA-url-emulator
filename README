@@ -26,7 +26,7 @@ INSTALLATION
    http://www.phpunit.de/manual/3.7/en/installation.html
 
    ex. pear config-set auto_discover 1
-       pear install --force --alldeps phpunit/phpunit
+       pear install --force --alldeps pear.phpunit.de/PHPUnit
 
 USAGE
 
