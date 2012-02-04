@@ -16,7 +16,8 @@ class UrlUpdaterTest extends PHPUnit_Framework_TestCase
                         'url' => 'github.com');
         $result = $this->contact_myucla_url_updater($params);
         
-        $this->assertTrue(false !== strpos($result, STATUS_INVALID_COURSE));
+        $this->assertTrue(false !== strpos($result, STATUS_INVALID_COURSE), 
+                "Got response: $result");
     }
 
     public function testBadSrs()
@@ -28,6 +29,79 @@ class UrlUpdaterTest extends PHPUnit_Framework_TestCase
         $result = $this->contact_myucla_url_updater($params);
         
         $this->assertTrue(false !== strpos($result, STATUS_INVALID_COURSE));
+    }
+    
+    public function testEmptyParams()
+    {
+        $params = array();
+        $result = $this->contact_myucla_url_updater($params);
+
+        $this->assertTrue(empty($result), "Got response: $result");        
+    }
+    
+    /**
+     * Does basic test of updating URL.
+     */
+    public function testValidParams()
+    {
+        // set URL
+        $params = array('term' => '11F',
+                        'srs' => '123456789',
+                        'url' => 'github.com');
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(false !== strpos($result, STATUS_SUCCESS), 
+                "Got response: $result");
+    }
+
+    /**
+     * Makes sure that you can query a URL
+     */
+    public function testSetAndGetUrl()
+    {
+        // set URL
+        $params = array('term' => '11F',
+                        'srs' => '123456789',
+                        'url' => 'github.com');
+        $saved_url = $params['url'];
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(false !== strpos($result, STATUS_SUCCESS), 
+                "Got response: $result");
+        
+
+        unset($params['url']);  // make sure that URL was cleared
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue($result == $saved_url, "Got response: $result");        
+    }        
+    
+    /**
+     * Makes sure that you can clear URL
+     */
+    public function testSettingAndClearingUrl()
+    {
+        // set URL
+        $params = array('term' => '11F',
+                        'srs' => '123456789',
+                        'url' => 'github.com');
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(false !== strpos($result, STATUS_SUCCESS), 
+                "Got response: $result");
+        
+        // clear URL for house keeping
+        $params['url'] = '';
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(false !== strpos($result, STATUS_SUCCESS), 
+                "Got response: $result");
+
+        // make sure that URL was cleared
+        unset($params['url']);
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(empty($result), "Got response: $result");        
     }    
     
     /** 

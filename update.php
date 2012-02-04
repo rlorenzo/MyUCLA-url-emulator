@@ -42,6 +42,8 @@ if (!empty($_GET)) {
     $mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);    
     
     if (MYUCLA_URL_VIEW == $params['mode']) {
+        unset($params['mode']); // mode isn't one of the binded parameters
+        
         // query and return url for given term/srs
         $sql = 'SELECT  url
                 FROM    iei_urls
@@ -54,23 +56,25 @@ if (!empty($_GET)) {
             print_status(STATUS_CONNECT_ERROR);
         }        
         
-        echo $result->fetchRow();   // output URL
+        echo $result->fetchOne();   // output URL
         
     } elseif (MYUCLA_URL_EDIT == $params['mode']) {
-        $sql = 'INSERT  iei_urls
-                SET     term=:term,
-                        srs=:srs,
-                        url=:url,
-                        name=:name,
-                        email=:email
+        unset($params['mode']); // mode isn't one of the binded parameters
+        $sql = 'INSERT INTO iei_urls
+                SET         term=:term,
+                            srs=:srs,
+                            url=:url,
+                            name=:name,
+                            email=:email
                 ON DUPLICATE KEY UPDATE
-                        url=:url,
-                        name=:name,
-                        email=:email';
+                            url=:url,
+                            name=:name,
+                            email=:email';
         $statement = $mdb2->prepare($sql);
         $result = $statement->execute($params);
         
         if (PEAR::isError($result)) {
+            echo ('<br>'.$result->getMessage().' <br> '.$result->getUserinfo().'<br>');
             print_status(STATUS_UPDATE_FAILED);
         } else {
             print_status(STATUS_SUCCESS);
@@ -109,7 +113,7 @@ function setup_script()
     $params['term'] = $_GET['term'];
     $params['srs'] = $_GET['srs'];
     
-    if (!empty($_GET['url'])) {
+    if (isset($_GET['url'])) {  // allow empty url so that you can clear the URL
         // user wants to update an url (don't do any real validate on url,
         // because the MyUCLA service doesn't seem to)
         $params['url'] = trim(urldecode($_GET['url']));
@@ -124,6 +128,8 @@ function setup_script()
         // user wants to view url for a given term/srs
         $params['mode'] = MYUCLA_URL_VIEW;        
     }
+    
+    return $params;
 }
 
 /**
