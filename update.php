@@ -105,7 +105,7 @@ function setup_script()
             !preg_match('/^[0-9]{9}$/', $_GET['srs'])) {
         die(print_status(STATUS_INVALID_COURSE));
     }
-    
+
     $params['term'] = $_GET['term'];
     $params['srs'] = $_GET['srs'];
     

@@ -25,6 +25,9 @@ INSTALLATION
 6. If you want to test the script, please install PHPunit and run the test suite
    http://www.phpunit.de/manual/3.7/en/installation.html
 
+   ex. pear config-set auto_discover 1
+       pear install --force --alldeps phpunit/phpunit
+
 USAGE
 
 When someone is making an update the script expects the following GET parameters:
