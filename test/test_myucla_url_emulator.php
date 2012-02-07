@@ -104,6 +104,28 @@ class UrlUpdaterTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(empty($result), "Got response: $result");        
     }    
     
+    /**
+     * Make sure that the URL is properly encoded and decoded, meaning that
+     * get parameters are properly saved.
+     */
+    public function testEncodedUrl()
+    {
+        // set URL
+        $test_url = 'test.com?param1=somewhere&param2=outthere';
+        $params = array('term' => '11F',
+                        'srs' => '123456789',
+                        'url' => urlencode($test_url));
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue(false !== strpos($result, STATUS_SUCCESS), 
+                "Got response: $result");        
+
+        unset($params['url']);  // make sure that URL was cleared
+        $result = $this->contact_myucla_url_updater($params);
+        
+        $this->assertTrue($result == $test_url, "Got response: $result");        
+    }         
+    
     /** 
      * Calls MyUCLA url emulator server with given parameters.
      * 
