@@ -38,6 +38,15 @@ class UrlUpdaterTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(empty($result), "Got response: $result");        
     }
+
+    public function testGetBadCourse()
+    {
+        $params = array('term' => '11F',
+                        'srs' => '12345678');
+        $result = $this->contact_myucla_url_updater($params);
+
+        $this->assertTrue(empty($result), "Got response: $result");        
+    }    
     
     /**
      * Does basic test of updating URL.

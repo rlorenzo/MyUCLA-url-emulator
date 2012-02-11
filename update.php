@@ -107,7 +107,13 @@ function setup_script()
     // first make sure that term/srs are valid and present
     if (!preg_match('/^[0-9]{2}[FWS1]$/', $_GET['term']) || 
             !preg_match('/^[0-9]{9}$/', $_GET['srs'])) {
-        die(print_status(STATUS_INVALID_COURSE));
+        // if trying to update a url, then give error
+        if (isset($_GET['url'])) {
+            die(print_status(STATUS_INVALID_COURSE));
+        } else {
+            // else just return blank
+            die();
+        }    
     }
 
     $params['term'] = $_GET['term'];
