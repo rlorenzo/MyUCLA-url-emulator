@@ -25,14 +25,15 @@ $sql = "SELECT      term,
         WHERE       1
         ORDER BY    updated_on DESC
         LIMIT       100";
-$records =& $mdb2->exec($sql);
+$records =& $mdb2->query($sql);
 
-if (empty($records)) {
+$num_rows = $records->numRows();
+if (empty($num_rows)) {
     die('No records found');
 }
 
 // display results in a table
-echo "<table><tr>";
+echo "<table border='1'><tr>";
 
 $header = array('term', 'srs', 'name', 'email', 'updated_on');
 foreach ($header as $head) {
@@ -40,7 +41,7 @@ foreach ($header as $head) {
 }
 echo '</tr>';
 
-foreach ($records as $record) {
+while (($record = $records->fetchRow())) {
     echo '<tr>';
     foreach ($header as $head) {
         echo '<td>' . $record[$head] . '</td>';
