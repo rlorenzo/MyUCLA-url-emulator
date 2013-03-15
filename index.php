@@ -35,7 +35,7 @@ if (empty($num_rows)) {
 // display results in a table
 echo "<table border='1'><tr>";
 
-$header = array('term', 'srs', 'name', 'email', 'updated_on');
+$header = array('term', 'srs', 'url', 'name', 'email', 'updated_on');
 foreach ($header as $head) {
     echo '<td>' . $head . '</td>';
 }
