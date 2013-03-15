@@ -16,5 +16,6 @@ CREATE TABLE IF NOT EXISTS `iei_urls` (
   `url` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
+  `updated_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`term`,`srs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
