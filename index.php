@@ -6,6 +6,7 @@
  */
 
 require_once(dirname(__FILE__) . '/config.php');
+require_once 'MDB2.php';
 
 // connect to database
 $mdb2 = MDB2::connect($dsn);
