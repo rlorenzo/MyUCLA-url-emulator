@@ -20,7 +20,7 @@ $sql = "SELECT      term,
                     url,
                     name,
                     email,
-                    FROM_UNIXTIME(updated_on) AS updated_on
+                    updated_on
         FROM        iei_urls
         WHERE       1
         ORDER BY    updated_on DESC
@@ -33,14 +33,16 @@ if (empty($num_rows)) {
 }
 
 // display results in a table
-echo "<table border='1'><tr>";
+echo "<table border='1'>";
 
 $header = array('term', 'srs', 'url', 'name', 'email', 'updated_on');
+echo '<thead><tr>';
 foreach ($header as $head) {
-    echo '<td>' . $head . '</td>';
+    echo '<th>' . $head . '</th>';
 }
-echo '</tr>';
+echo '</tr></thead>';
 
+echo '<tbody>';
 while (($record = $records->fetchRow())) {
     echo '<tr>';
     foreach ($header as $head) {
@@ -48,3 +50,4 @@ while (($record = $records->fetchRow())) {
     }
     echo '</tr>';
 }
+echo '</tbody></table>';
