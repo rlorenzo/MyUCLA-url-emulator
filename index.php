@@ -46,7 +46,7 @@ echo '<tbody>';
 while (($record = $records->fetchRow())) {
     echo '<tr>';
     foreach ($header as $head) {
-        echo '<td>' . $record[$head] . '</td>';
+        echo '<td>' . htmlentities($record[$head]) . '</td>';
     }
     echo '</tr>';
 }
