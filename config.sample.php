@@ -14,12 +14,11 @@ define('MYUCLA_URL_VIEW', 1);
 define('MYUCLA_URL_EDIT', 2);
 
 $dsn = array(
-    'phptype'  => 'mysqli',
     'username' => '',   // user account that can read/edit myucla_updater
     'password' => '',
     'hostspec' => 'localhost',
     'database' => 'myucla_updater',
 );
 
-$test_server_url = '';  // must be set if you wish to run the PHPunit test suite
+$test_server_url = 'http://localhost:8000/update.php';  // must be set if you wish to run the PHPunit test suite
 ?>

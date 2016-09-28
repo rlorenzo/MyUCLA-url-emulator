@@ -6,14 +6,12 @@
  */
 
 require_once(dirname(__FILE__) . '/config.php');
-require_once 'MDB2.php';
 
 // connect to database
-$mdb2 = MDB2::connect($dsn);
-if (PEAR::isError($mdb2)) {
+$mysqli = new mysqli($dsn['hostspec'], $dsn['username'], $dsn['password'], $dsn['database']);
+if ($mysqli->connect_errno) {
     print_status(STATUS_CONNECT_ERROR);
 }
-$mdb2->setFetchMode(MDB2_FETCHMODE_ASSOC);
 
 $sql = "SELECT      term,
                     srs,
@@ -25,10 +23,10 @@ $sql = "SELECT      term,
         WHERE       1
         ORDER BY    updated_on DESC
         LIMIT       100";
-$records =& $mdb2->query($sql);
+$records = $mysqli->query($sql);
 
-$num_rows = $records->numRows();
-if (empty($num_rows)) {
+$numrows = $records->num_rows;
+if (empty($numrows)) {
     die('No records found');
 }
 
@@ -43,7 +41,7 @@ foreach ($header as $head) {
 echo '</tr></thead>';
 
 echo '<tbody>';
-while (($record = $records->fetchRow())) {
+while (($record = $records->fetch_assoc())) {
     echo '<tr>';
     foreach ($header as $head) {
         echo '<td>' . htmlentities($record[$head]) . '</td>';

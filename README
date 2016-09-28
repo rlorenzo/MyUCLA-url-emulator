@@ -6,23 +6,17 @@ service.
 
 INSTALLATION
 
-1. Make sure you have the PEAR:MDB2 package installed
-   http://pear.php.net/package/MDB2
+1. Please create the database and table specified in install.sql
 
-   ex. pear install MDB2 
-       pear install MDB2#mysqli
+2. Create a MySQL user account that can access and update the given table.
 
-2. Please create the database and table specified in install.sql
-
-3. Create a MySQL user account that can access and update the given table.
-
-4. Copy the config.sample.php into config.php and fill in the values for the 
+3. Copy the config.sample.php into config.php and fill in the values for the
    MySQL user account.
 
-5. Done. You might want to create an .htaccess file to ip-restrict access to
+4. Done. You might want to create an .htaccess file to ip-restrict access to
    the script: http://www.udel.edu/topics/internet/WWW/restricting.html
 
-6. If you want to test the script, please install PHPunit and run the test suite
+5. If you want to test the script, please install PHPunit and run the test suite
    http://www.phpunit.de/manual/3.7/en/installation.html
 
    ex. pear config-set auto_discover 1
